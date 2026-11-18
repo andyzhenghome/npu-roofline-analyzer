@@ -1,0 +1,1219 @@
+{
+  "hardware": {
+    "name": "NVIDIA H100",
+    "peak_tflops": {
+      "fp16": 989,
+      "fp32": 67,
+      "bf16": 989,
+      "int8": 1979,
+      "fp8": 1979
+    },
+    "memory_bandwidth_gb_s": 3350,
+    "dtype": "fp16"
+  },
+  "summary": {
+    "total_operators": 32,
+    "total_flops": 1978335516672,
+    "total_memory_bytes": 3081244688.0,
+    "overall_arithmetic_intensity": 642.057258346501,
+    "estimated_total_time_us": 2563.486264828553,
+    "compute_bound_ops": 14,
+    "memory_bound_ops": 18,
+    "latency_bound_ops": 0,
+    "average_utilization": 0.37972923981104156,
+    "peak_gflops": 989000,
+    "memory_bandwidth_gb_s": 3350,
+    "dtype": "fp16"
+  },
+  "warnings": [
+    "\u5b58\u5728\u4f4e\u8ba1\u7b97\u5f3a\u5ea6\u7b97\u5b50 (OI<1): ['P0_Mul', 'D0_QKV', 'D0_Attn', 'D0_AttnOut', 'D0_LN', 'D0_Gate', 'D0_Down', 'D0_ResAdd', 'P1_Mul', 'D1_QKV', 'D1_Attn', 'D1_AttnOut', 'D1_LN', 'D1_Gate', 'D1_Down', 'D1_ResAdd']\uff0c\u6781\u5ea6\u53d7\u5185\u5b58\u5e26\u5bbd\u9650\u5236"
+  ],
+  "operators": [
+    {
+      "name": "P0_QKV",
+      "category": "gemm",
+      "operational_intensity": 1228.8,
+      "achieved_gflops": 845595.0,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "compute",
+      "utilization": 0.855,
+      "metadata": {
+        "flops": 206158430208,
+        "memory_bytes": 167772160,
+        "input_shapes": [
+          [
+            1,
+            2048,
+            4096
+          ],
+          [
+            1,
+            4096,
+            12288
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            2048,
+            12288
+          ]
+        ],
+        "flops_per_gemm": 206158430208,
+        "bytes_per_elem": 2
+      }
+    },
+    {
+      "name": "P0_Attn",
+      "category": "attention",
+      "operational_intensity": 1641.6,
+      "achieved_gflops": 667575.0,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "compute",
+      "utilization": 0.675,
+      "metadata": {
+        "flops": 344268472320,
+        "memory_bytes": 209715200.0,
+        "input_shapes": [
+          [
+            1,
+            2048,
+            4096
+          ],
+          [
+            3,
+            4096,
+            4096
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            2048,
+            4096
+          ]
+        ],
+        "flops_breakdown": {
+          "qkv_proj": 206158430208,
+          "qkt": 34359738368,
+          "softmax": 671088640,
+          "attn_v": 34359738368,
+          "out_proj": 68719476736,
+          "dropout": 0
+        },
+        "memory_breakdown": {
+          "input": 16777216,
+          "qkv_weight": 100663296,
+          "qkv_output": 50331648,
+          "attn_matrix": 33554432,
+          "v": 16777216,
+          "out_weight": 33554432,
+          "output": 16777216,
+          "kv_cache": 0
+        },
+        "is_memory_bound": false
+      }
+    },
+    {
+      "name": "P0_AttnOut",
+      "category": "gemm",
+      "operational_intensity": 1024.0,
+      "achieved_gflops": 845595.0,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "compute",
+      "utilization": 0.855,
+      "metadata": {
+        "flops": 68719476736,
+        "memory_bytes": 67108864,
+        "input_shapes": [
+          [
+            1,
+            2048,
+            4096
+          ],
+          [
+            1,
+            4096,
+            4096
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            2048,
+            4096
+          ]
+        ],
+        "flops_per_gemm": 68719476736,
+        "bytes_per_elem": 2
+      }
+    },
+    {
+      "name": "P0_LN",
+      "category": "normalization",
+      "operational_intensity": 1.7482926829268293,
+      "achieved_gflops": 195822.00000000003,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "compute",
+      "utilization": 0.19800000000000004,
+      "metadata": {
+        "flops": 58720256,
+        "memory_bytes": 33587200,
+        "input_shapes": [
+          [
+            1,
+            2048,
+            4096
+          ],
+          [
+            4096
+          ],
+          [
+            4096
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            2048,
+            4096
+          ]
+        ]
+      }
+    },
+    {
+      "name": "P0_Gate",
+      "category": "gemm",
+      "operational_intensity": 1214.6758620689654,
+      "achieved_gflops": 845595.0,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "compute",
+      "utilization": 0.855,
+      "metadata": {
+        "flops": 184683593728,
+        "memory_bytes": 152043520,
+        "input_shapes": [
+          [
+            1,
+            2048,
+            4096
+          ],
+          [
+            1,
+            4096,
+            11008
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            2048,
+            11008
+          ]
+        ],
+        "flops_per_gemm": 184683593728,
+        "bytes_per_elem": 2
+      }
+    },
+    {
+      "name": "P0_Down",
+      "category": "gemm",
+      "operational_intensity": 1214.6758620689654,
+      "achieved_gflops": 845595.0,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "compute",
+      "utilization": 0.855,
+      "metadata": {
+        "flops": 184683593728,
+        "memory_bytes": 152043520,
+        "input_shapes": [
+          [
+            1,
+            2048,
+            11008
+          ],
+          [
+            1,
+            11008,
+            4096
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            2048,
+            4096
+          ]
+        ],
+        "flops_per_gemm": 184683593728,
+        "bytes_per_elem": 2
+      }
+    },
+    {
+      "name": "P0_SiLU",
+      "category": "activation",
+      "operational_intensity": 1.0,
+      "achieved_gflops": 160800.0,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "memory",
+      "utilization": 0.16258847320525785,
+      "metadata": {
+        "flops": 90177536,
+        "memory_bytes": 90177536,
+        "input_shapes": [
+          [
+            22544384
+          ]
+        ],
+        "output_shapes": [
+          [
+            22544384
+          ]
+        ]
+      }
+    },
+    {
+      "name": "P0_Mul",
+      "category": "elementwise",
+      "operational_intensity": 0.16666666666666666,
+      "achieved_gflops": 22333.333333333336,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "memory",
+      "utilization": 0.022581732389619146,
+      "metadata": {
+        "flops": 22544384,
+        "memory_bytes": 135266304,
+        "input_shapes": [
+          [
+            22544384
+          ],
+          [
+            22544384
+          ]
+        ],
+        "output_shapes": [
+          [
+            22544384
+          ]
+        ]
+      }
+    },
+    {
+      "name": "D0_QKV",
+      "category": "gemm",
+      "operational_intensity": 0.9996745850959974,
+      "achieved_gflops": 254517.14936544097,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "memory",
+      "utilization": 0.25734797711369156,
+      "metadata": {
+        "flops": 100663296,
+        "memory_bytes": 100696064,
+        "input_shapes": [
+          [
+            1,
+            1,
+            4096
+          ],
+          [
+            1,
+            4096,
+            12288
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            1,
+            12288
+          ]
+        ],
+        "flops_per_gemm": 100663296,
+        "bytes_per_elem": 2
+      }
+    },
+    {
+      "name": "D0_Attn",
+      "category": "attention",
+      "operational_intensity": 0.7706318655525303,
+      "achieved_gflops": 154897.0049760586,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "memory",
+      "utilization": 0.15661982302938182,
+      "metadata": {
+        "flops": 168099840,
+        "memory_bytes": 218132480.0,
+        "input_shapes": [
+          [
+            1,
+            1,
+            4096
+          ],
+          [
+            3,
+            4096,
+            4096
+          ],
+          [
+            2,
+            1,
+            2048,
+            32,
+            128
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            1,
+            4096
+          ]
+        ],
+        "flops_breakdown": {
+          "qkv_proj": 100663296,
+          "qkt": 16777216,
+          "softmax": 327680,
+          "attn_v": 16777216,
+          "out_proj": 33554432,
+          "dropout": 0
+        },
+        "memory_breakdown": {
+          "input": 8192,
+          "qkv_weight": 100663296,
+          "qkv_output": 24576,
+          "attn_matrix": 262144,
+          "v": 16777216,
+          "out_weight": 33554432,
+          "output": 8192,
+          "kv_cache": 67108864
+        },
+        "is_memory_bound": true
+      }
+    },
+    {
+      "name": "D0_AttnOut",
+      "category": "gemm",
+      "operational_intensity": 0.9995119570522206,
+      "achieved_gflops": 338238.0,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 5000,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 1250000.0,
+      "bottleneck": "compute",
+      "utilization": 0.342,
+      "metadata": {
+        "flops": 33554432,
+        "memory_bytes": 33570816,
+        "input_shapes": [
+          [
+            1,
+            1,
+            4096
+          ],
+          [
+            1,
+            4096,
+            4096
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            1,
+            4096
+          ]
+        ],
+        "flops_per_gemm": 33554432,
+        "bytes_per_elem": 2
+      }
+    },
+    {
+      "name": "D0_LN",
+      "category": "normalization",
+      "operational_intensity": 0.8747864290944594,
+      "achieved_gflops": 128943.51964852335,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "memory",
+      "utilization": 0.13037767406321876,
+      "metadata": {
+        "flops": 28672,
+        "memory_bytes": 32776,
+        "input_shapes": [
+          [
+            1,
+            1,
+            4096
+          ],
+          [
+            4096
+          ],
+          [
+            4096
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            1,
+            4096
+          ]
+        ]
+      }
+    },
+    {
+      "name": "D0_Gate",
+      "category": "gemm",
+      "operational_intensity": 0.9996651285282115,
+      "achieved_gflops": 254514.7417232827,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "memory",
+      "utilization": 0.25734554269290466,
+      "metadata": {
+        "flops": 90177536,
+        "memory_bytes": 90207744,
+        "input_shapes": [
+          [
+            1,
+            1,
+            4096
+          ],
+          [
+            1,
+            4096,
+            11008
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            1,
+            11008
+          ]
+        ],
+        "flops_per_gemm": 90177536,
+        "bytes_per_elem": 2
+      }
+    },
+    {
+      "name": "D0_Down",
+      "category": "gemm",
+      "operational_intensity": 0.9996651285282115,
+      "achieved_gflops": 254514.7417232827,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "memory",
+      "utilization": 0.25734554269290466,
+      "metadata": {
+        "flops": 90177536,
+        "memory_bytes": 90207744,
+        "input_shapes": [
+          [
+            1,
+            1,
+            11008
+          ],
+          [
+            1,
+            11008,
+            4096
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            1,
+            4096
+          ]
+        ],
+        "flops_per_gemm": 90177536,
+        "bytes_per_elem": 2
+      }
+    },
+    {
+      "name": "D0_SiLU",
+      "category": "activation",
+      "operational_intensity": 1.0,
+      "achieved_gflops": 160800.0,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "memory",
+      "utilization": 0.16258847320525785,
+      "metadata": {
+        "flops": 44032,
+        "memory_bytes": 44032,
+        "input_shapes": [
+          [
+            11008
+          ]
+        ],
+        "output_shapes": [
+          [
+            11008
+          ]
+        ]
+      }
+    },
+    {
+      "name": "D0_ResAdd",
+      "category": "elementwise",
+      "operational_intensity": 0.25,
+      "achieved_gflops": 33500.00000000001,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "memory",
+      "utilization": 0.033872598584428724,
+      "metadata": {
+        "flops": 4096,
+        "memory_bytes": 16384,
+        "input_shapes": [
+          [
+            4096
+          ],
+          [
+            4096
+          ]
+        ],
+        "output_shapes": [
+          [
+            4096
+          ]
+        ]
+      }
+    },
+    {
+      "name": "P1_QKV",
+      "category": "gemm",
+      "operational_intensity": 1228.8,
+      "achieved_gflops": 845595.0,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "compute",
+      "utilization": 0.855,
+      "metadata": {
+        "flops": 206158430208,
+        "memory_bytes": 167772160,
+        "input_shapes": [
+          [
+            1,
+            2048,
+            4096
+          ],
+          [
+            1,
+            4096,
+            12288
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            2048,
+            12288
+          ]
+        ],
+        "flops_per_gemm": 206158430208,
+        "bytes_per_elem": 2
+      }
+    },
+    {
+      "name": "P1_Attn",
+      "category": "attention",
+      "operational_intensity": 1641.6,
+      "achieved_gflops": 667575.0,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "compute",
+      "utilization": 0.675,
+      "metadata": {
+        "flops": 344268472320,
+        "memory_bytes": 209715200.0,
+        "input_shapes": [
+          [
+            1,
+            2048,
+            4096
+          ],
+          [
+            3,
+            4096,
+            4096
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            2048,
+            4096
+          ]
+        ],
+        "flops_breakdown": {
+          "qkv_proj": 206158430208,
+          "qkt": 34359738368,
+          "softmax": 671088640,
+          "attn_v": 34359738368,
+          "out_proj": 68719476736,
+          "dropout": 0
+        },
+        "memory_breakdown": {
+          "input": 16777216,
+          "qkv_weight": 100663296,
+          "qkv_output": 50331648,
+          "attn_matrix": 33554432,
+          "v": 16777216,
+          "out_weight": 33554432,
+          "output": 16777216,
+          "kv_cache": 0
+        },
+        "is_memory_bound": false
+      }
+    },
+    {
+      "name": "P1_AttnOut",
+      "category": "gemm",
+      "operational_intensity": 1024.0,
+      "achieved_gflops": 845595.0,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "compute",
+      "utilization": 0.855,
+      "metadata": {
+        "flops": 68719476736,
+        "memory_bytes": 67108864,
+        "input_shapes": [
+          [
+            1,
+            2048,
+            4096
+          ],
+          [
+            1,
+            4096,
+            4096
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            2048,
+            4096
+          ]
+        ],
+        "flops_per_gemm": 68719476736,
+        "bytes_per_elem": 2
+      }
+    },
+    {
+      "name": "P1_LN",
+      "category": "normalization",
+      "operational_intensity": 1.7482926829268293,
+      "achieved_gflops": 195822.00000000003,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "compute",
+      "utilization": 0.19800000000000004,
+      "metadata": {
+        "flops": 58720256,
+        "memory_bytes": 33587200,
+        "input_shapes": [
+          [
+            1,
+            2048,
+            4096
+          ],
+          [
+            4096
+          ],
+          [
+            4096
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            2048,
+            4096
+          ]
+        ]
+      }
+    },
+    {
+      "name": "P1_Gate",
+      "category": "gemm",
+      "operational_intensity": 1214.6758620689654,
+      "achieved_gflops": 845595.0,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "compute",
+      "utilization": 0.855,
+      "metadata": {
+        "flops": 184683593728,
+        "memory_bytes": 152043520,
+        "input_shapes": [
+          [
+            1,
+            2048,
+            4096
+          ],
+          [
+            1,
+            4096,
+            11008
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            2048,
+            11008
+          ]
+        ],
+        "flops_per_gemm": 184683593728,
+        "bytes_per_elem": 2
+      }
+    },
+    {
+      "name": "P1_Down",
+      "category": "gemm",
+      "operational_intensity": 1214.6758620689654,
+      "achieved_gflops": 845595.0,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "compute",
+      "utilization": 0.855,
+      "metadata": {
+        "flops": 184683593728,
+        "memory_bytes": 152043520,
+        "input_shapes": [
+          [
+            1,
+            2048,
+            11008
+          ],
+          [
+            1,
+            11008,
+            4096
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            2048,
+            4096
+          ]
+        ],
+        "flops_per_gemm": 184683593728,
+        "bytes_per_elem": 2
+      }
+    },
+    {
+      "name": "P1_SiLU",
+      "category": "activation",
+      "operational_intensity": 1.0,
+      "achieved_gflops": 160800.0,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "memory",
+      "utilization": 0.16258847320525785,
+      "metadata": {
+        "flops": 90177536,
+        "memory_bytes": 90177536,
+        "input_shapes": [
+          [
+            22544384
+          ]
+        ],
+        "output_shapes": [
+          [
+            22544384
+          ]
+        ]
+      }
+    },
+    {
+      "name": "P1_Mul",
+      "category": "elementwise",
+      "operational_intensity": 0.16666666666666666,
+      "achieved_gflops": 22333.333333333336,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "memory",
+      "utilization": 0.022581732389619146,
+      "metadata": {
+        "flops": 22544384,
+        "memory_bytes": 135266304,
+        "input_shapes": [
+          [
+            22544384
+          ],
+          [
+            22544384
+          ]
+        ],
+        "output_shapes": [
+          [
+            22544384
+          ]
+        ]
+      }
+    },
+    {
+      "name": "D1_QKV",
+      "category": "gemm",
+      "operational_intensity": 0.9996745850959974,
+      "achieved_gflops": 254517.14936544097,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "memory",
+      "utilization": 0.25734797711369156,
+      "metadata": {
+        "flops": 100663296,
+        "memory_bytes": 100696064,
+        "input_shapes": [
+          [
+            1,
+            1,
+            4096
+          ],
+          [
+            1,
+            4096,
+            12288
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            1,
+            12288
+          ]
+        ],
+        "flops_per_gemm": 100663296,
+        "bytes_per_elem": 2
+      }
+    },
+    {
+      "name": "D1_Attn",
+      "category": "attention",
+      "operational_intensity": 0.7706318655525303,
+      "achieved_gflops": 154897.0049760586,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "memory",
+      "utilization": 0.15661982302938182,
+      "metadata": {
+        "flops": 168099840,
+        "memory_bytes": 218132480.0,
+        "input_shapes": [
+          [
+            1,
+            1,
+            4096
+          ],
+          [
+            3,
+            4096,
+            4096
+          ],
+          [
+            2,
+            1,
+            2048,
+            32,
+            128
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            1,
+            4096
+          ]
+        ],
+        "flops_breakdown": {
+          "qkv_proj": 100663296,
+          "qkt": 16777216,
+          "softmax": 327680,
+          "attn_v": 16777216,
+          "out_proj": 33554432,
+          "dropout": 0
+        },
+        "memory_breakdown": {
+          "input": 8192,
+          "qkv_weight": 100663296,
+          "qkv_output": 24576,
+          "attn_matrix": 262144,
+          "v": 16777216,
+          "out_weight": 33554432,
+          "output": 8192,
+          "kv_cache": 67108864
+        },
+        "is_memory_bound": true
+      }
+    },
+    {
+      "name": "D1_AttnOut",
+      "category": "gemm",
+      "operational_intensity": 0.9995119570522206,
+      "achieved_gflops": 338238.0,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 5000,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 1250000.0,
+      "bottleneck": "compute",
+      "utilization": 0.342,
+      "metadata": {
+        "flops": 33554432,
+        "memory_bytes": 33570816,
+        "input_shapes": [
+          [
+            1,
+            1,
+            4096
+          ],
+          [
+            1,
+            4096,
+            4096
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            1,
+            4096
+          ]
+        ],
+        "flops_per_gemm": 33554432,
+        "bytes_per_elem": 2
+      }
+    },
+    {
+      "name": "D1_LN",
+      "category": "normalization",
+      "operational_intensity": 0.8747864290944594,
+      "achieved_gflops": 128943.51964852335,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "memory",
+      "utilization": 0.13037767406321876,
+      "metadata": {
+        "flops": 28672,
+        "memory_bytes": 32776,
+        "input_shapes": [
+          [
+            1,
+            1,
+            4096
+          ],
+          [
+            4096
+          ],
+          [
+            4096
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            1,
+            4096
+          ]
+        ]
+      }
+    },
+    {
+      "name": "D1_Gate",
+      "category": "gemm",
+      "operational_intensity": 0.9996651285282115,
+      "achieved_gflops": 254514.7417232827,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "memory",
+      "utilization": 0.25734554269290466,
+      "metadata": {
+        "flops": 90177536,
+        "memory_bytes": 90207744,
+        "input_shapes": [
+          [
+            1,
+            1,
+            4096
+          ],
+          [
+            1,
+            4096,
+            11008
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            1,
+            11008
+          ]
+        ],
+        "flops_per_gemm": 90177536,
+        "bytes_per_elem": 2
+      }
+    },
+    {
+      "name": "D1_Down",
+      "category": "gemm",
+      "operational_intensity": 0.9996651285282115,
+      "achieved_gflops": 254514.7417232827,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "memory",
+      "utilization": 0.25734554269290466,
+      "metadata": {
+        "flops": 90177536,
+        "memory_bytes": 90207744,
+        "input_shapes": [
+          [
+            1,
+            1,
+            11008
+          ],
+          [
+            1,
+            11008,
+            4096
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            1,
+            4096
+          ]
+        ],
+        "flops_per_gemm": 90177536,
+        "bytes_per_elem": 2
+      }
+    },
+    {
+      "name": "D1_SiLU",
+      "category": "activation",
+      "operational_intensity": 1.0,
+      "achieved_gflops": 160800.0,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "memory",
+      "utilization": 0.16258847320525785,
+      "metadata": {
+        "flops": 44032,
+        "memory_bytes": 44032,
+        "input_shapes": [
+          [
+            11008
+          ]
+        ],
+        "output_shapes": [
+          [
+            11008
+          ]
+        ]
+      }
+    },
+    {
+      "name": "D1_ResAdd",
+      "category": "elementwise",
+      "operational_intensity": 0.25,
+      "achieved_gflops": 33500.00000000001,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "memory",
+      "utilization": 0.033872598584428724,
+      "metadata": {
+        "flops": 4096,
+        "memory_bytes": 16384,
+        "input_shapes": [
+          [
+            4096
+          ],
+          [
+            4096
+          ]
+        ],
+        "output_shapes": [
+          [
+            4096
+          ]
+        ]
+      }
+    }
+  ]
+}

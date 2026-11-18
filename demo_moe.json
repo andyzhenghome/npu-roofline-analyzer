@@ -1,0 +1,266 @@
+{
+  "hardware": {
+    "name": "NVIDIA H100",
+    "peak_tflops": {
+      "fp16": 989,
+      "fp32": 67,
+      "bf16": 989,
+      "int8": 1979,
+      "fp8": 1979
+    },
+    "memory_bandwidth_gb_s": 3350,
+    "dtype": "fp16"
+  },
+  "summary": {
+    "total_operators": 7,
+    "total_flops": 5774147321856,
+    "total_memory_bytes": 7650607680,
+    "overall_arithmetic_intensity": 754.7305473460116,
+    "estimated_total_time_us": 7622.379951155091,
+    "estimated_compute_time_us": 6838.443204488424,
+    "estimated_comm_time_us": 783.9367466666666,
+    "compute_bound_ops": 4,
+    "memory_bound_ops": 3,
+    "latency_bound_ops": 0,
+    "average_utilization": 0.4793936154846165,
+    "peak_gflops": 989000,
+    "memory_bandwidth_gb_s": 3350,
+    "dtype": "fp16"
+  },
+  "warnings": [
+    "\u5b58\u5728\u4f4e\u8ba1\u7b97\u5f3a\u5ea6\u7b97\u5b50 (OI<1): ['MoE_Mul', 'MoE_AllToAll']\uff0c\u6781\u5ea6\u53d7\u5185\u5b58\u5e26\u5bbd\u9650\u5236"
+  ],
+  "operators": [
+    {
+      "name": "MoE_Router",
+      "category": "gemm",
+      "operational_intensity": 7.976630963972736,
+      "achieved_gflops": 507357.0,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "compute",
+      "utilization": 0.513,
+      "metadata": {
+        "flops": 536870912,
+        "memory_bytes": 67305472,
+        "input_shapes": [
+          [
+            1,
+            8192,
+            4096
+          ],
+          [
+            1,
+            4096,
+            8
+          ]
+        ],
+        "output_shapes": [
+          [
+            1,
+            8192,
+            8
+          ]
+        ],
+        "flops_per_gemm": 536870912,
+        "bytes_per_elem": 2
+      }
+    },
+    {
+      "name": "MoE_Gate_Grouped",
+      "category": "gemm",
+      "operational_intensity": 1246.6085405836677,
+      "achieved_gflops": 845595.0,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "compute",
+      "utilization": 0.855,
+      "metadata": {
+        "flops": 1924145348608,
+        "memory_bytes": 1543504064,
+        "input_shapes": [
+          [
+            8,
+            2048,
+            4096
+          ],
+          [
+            8,
+            4096,
+            14336
+          ]
+        ],
+        "output_shapes": [
+          [
+            8,
+            2048,
+            14336
+          ]
+        ],
+        "flops_per_gemm": 240518168576,
+        "bytes_per_elem": 2
+      }
+    },
+    {
+      "name": "MoE_Up_Grouped",
+      "category": "gemm",
+      "operational_intensity": 1246.6085405836677,
+      "achieved_gflops": 845595.0,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "compute",
+      "utilization": 0.855,
+      "metadata": {
+        "flops": 1924145348608,
+        "memory_bytes": 1543504064,
+        "input_shapes": [
+          [
+            8,
+            2048,
+            4096
+          ],
+          [
+            8,
+            4096,
+            14336
+          ]
+        ],
+        "output_shapes": [
+          [
+            8,
+            2048,
+            14336
+          ]
+        ],
+        "flops_per_gemm": 240518168576,
+        "bytes_per_elem": 2
+      }
+    },
+    {
+      "name": "MoE_SiLU",
+      "category": "activation",
+      "operational_intensity": 1.0,
+      "achieved_gflops": 241199.99999999997,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "memory",
+      "utilization": 0.24388270980788673,
+      "metadata": {
+        "flops": 939524096,
+        "memory_bytes": 939524096,
+        "input_shapes": [
+          [
+            234881024
+          ]
+        ],
+        "output_shapes": [
+          [
+            234881024
+          ]
+        ]
+      }
+    },
+    {
+      "name": "MoE_Mul",
+      "category": "elementwise",
+      "operational_intensity": 0.16666666666666666,
+      "achieved_gflops": 33499.99999999999,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "memory",
+      "utilization": 0.03387259858442871,
+      "metadata": {
+        "flops": 234881024,
+        "memory_bytes": 1409286144,
+        "input_shapes": [
+          [
+            234881024
+          ],
+          [
+            234881024
+          ]
+        ],
+        "output_shapes": [
+          [
+            234881024
+          ]
+        ]
+      }
+    },
+    {
+      "name": "MoE_Down_Grouped",
+      "category": "gemm",
+      "operational_intensity": 1246.6085405836677,
+      "achieved_gflops": 845595.0,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "compute",
+      "utilization": 0.855,
+      "metadata": {
+        "flops": 1924145348608,
+        "memory_bytes": 1543504064,
+        "input_shapes": [
+          [
+            8,
+            2048,
+            14336
+          ],
+          [
+            8,
+            14336,
+            4096
+          ]
+        ],
+        "output_shapes": [
+          [
+            8,
+            2048,
+            4096
+          ]
+        ],
+        "flops_per_gemm": 240518168576,
+        "bytes_per_elem": 2
+      }
+    },
+    {
+      "name": "MoE_AllToAll",
+      "category": "communication",
+      "operational_intensity": 0.0,
+      "achieved_gflops": 0.0,
+      "peak_gflops": 989000,
+      "memory_bandwidth_gb_s": 3350,
+      "compute_ceiling_gflops": 989000,
+      "memory_ceiling_gflops": 837500.0,
+      "bottleneck": "memory",
+      "utilization": 0.0,
+      "metadata": {
+        "flops": 0,
+        "memory_bytes": 603979776,
+        "input_shapes": [
+          [
+            33554432
+          ]
+        ],
+        "output_shapes": [
+          [
+            33554432
+          ]
+        ],
+        "is_compute_bound": false,
+        "comm_efficiency": 0.14285714285714285
+      }
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NPU Roofline Analysis Result",
+  "type": "object",
+  "properties": {
+    "hardware": {
+      "type": "object",
+      "properties": {
+        "name": {"type": "string"},
+        "peak_tflops": {"type": "object", "additionalProperties": {"type": "number"}},
+        "memory_bandwidth_gb_s": {"type": "number"},
+        "dtype": {"type": "string"}
+      },
+      "required": ["name", "peak_tflops", "memory_bandwidth_gb_s", "dtype"]
+    },
+    "summary": {
+      "type": "object",
+      "properties": {
+        "total_operators": {"type": "integer"},
+        "total_flops": {"type": "integer"},
+        "total_memory_bytes": {"type": "integer"},
+        "overall_arithmetic_intensity": {"type": "number"},
+        "estimated_total_time_us": {"type": "number"},
+        "compute_bound_ops": {"type": "integer"},
+        "memory_bound_ops": {"type": "integer"},
+        "latency_bound_ops": {"type": "integer"},
+        "average_utilization": {"type": "number"},
+        "peak_gflops": {"type": "number"},
+        "memory_bandwidth_gb_s": {"type": "number"},
+        "dtype": {"type": "string"}
+      },
+      "required": ["total_operators", "total_flops", "total_memory_bytes"]
+    },
+    "warnings": {"type": "array", "items": {"type": "string"}},
+    "operators": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "category": {"type": "string"},
+          "operational_intensity": {"type": "number"},
+          "achieved_gflops": {"type": "number"},
+          "peak_gflops": {"type": "number"},
+          "memory_bandwidth_gb_s": {"type": "number"},
+          "compute_ceiling_gflops": {"type": "number"},
+          "memory_ceiling_gflops": {"type": "number"},
+          "bottleneck": {"type": "string", "enum": ["compute", "memory", "latency"]},
+          "utilization": {"type": "number"},
+          "metadata": {"type": "object"}
+        },
+        "required": ["name", "category", "operational_intensity", "achieved_gflops"]
+      }
+    }
+  },
+  "required": ["hardware", "summary", "operators"]
+}
